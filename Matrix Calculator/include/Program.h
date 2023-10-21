@@ -11,11 +11,13 @@ public:
 	void run();
 
 private:
-	Matrix matrixA;
-	Matrix matrixB;
-	double scalar;
+	Matrix MatrixA;
+	Matrix MatrixB;
+	double Scalar;
 
-	void loadMatricesAndScalar(const std::string& filename);
-	void displayMatrices();
-	void performOperations();
+	void loadMatricesAndScalar(const std::string& Filename);
+	void readMatrix(std::ifstream& File, std::vector<std::vector<int>>& Matrix);
+	void displayMatrix(const std::vector<std::vector<int>>& Matrix);
+	void displayMatrices() const;
+	void performOperations() const;
 };
