@@ -19,7 +19,7 @@ public:
 	Matrix matrixAddition(const Matrix& other) const;
 	Matrix matrixSubtraction(const Matrix& other) const;
 	Matrix matrixMultiplication(const Matrix& other) const;
-	Matrix identityMatrix() const;
+	Matrix identityMatrix(Matrix _Matrix) const;
 
 	// Add operator[] for accessing rows
 	const std::vector<double>& operator[](int index) const

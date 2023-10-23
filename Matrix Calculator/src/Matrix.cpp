@@ -253,28 +253,13 @@ Matrix Matrix::matrixMultiplication(const Matrix& Other) const
 	return resultant;
 }
 
-Matrix Matrix::identityMatrix() const
+Matrix Matrix::identityMatrix(Matrix _Matrix) const
 {
 	// Implementation for identity matrix
 	Matrix identity;
 	identity.resize(4, 4);
 
-	identity[0][0] = 1;
-	identity[0][1] = 0;
-	identity[0][2] = 0;
-	identity[0][3] = 0;
-	identity[1][0] = 0;
-	identity[1][1] = 1;
-	identity[1][2] = 0;
-	identity[1][3] = 0;
-	identity[2][0] = 0;
-	identity[2][1] = 0;
-	identity[2][2] = 1;
-	identity[2][3] = 0;
-	identity[3][0] = 0;
-	identity[3][1] = 0;
-	identity[3][2] = 0;
-	identity[3][3] = 1;
+	identity = _Matrix.matrixMultiplication(_Matrix.inverse());
 
 	return identity;
 }

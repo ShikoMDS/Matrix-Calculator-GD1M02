@@ -103,5 +103,5 @@ void Program::performOperations()
 	
 	// identity matrix
 	std::cout << "\nIdentity Matrix:\n";
-	matrixA.identityMatrix().display();
+	matrixA.identityMatrix(matrixA).display();
 }
