@@ -62,6 +62,7 @@ void Program::loadMatricesAndScalar(const std::string& Filename)
 
 void Program::displayMatrices() const
 {
+	// Call the display function both matrices and the scalar as read
 	std::cout << "Matrix A:" << std::endl;
 	MatrixA.display();
 
@@ -74,45 +75,44 @@ void Program::displayMatrices() const
 void Program::performOperations() const
 {
 	// Matrix operations using the Matrix class
-	// Call matrix member functions here
 
-	// determinant
+	// Determinant
 	std::cout << "\n|A|: " << MatrixA.determinant();
 	std::cout << "\n|B|: " << MatrixB.determinant();
 
-	// transpose
+	// Transpose
 	std::cout << "\n\nTranspose of A:\n";
 	MatrixA.transpose().display();
 	std::cout << "\n\nTranspose of B:\n";
 	MatrixB.transpose().display();
 	
-	// inverse
+	// Inverse
 	std::cout << "\nInverse of A:\n";
 	MatrixA.inverse().display();
 	std::cout << "\nInverse of B:\n";
 	MatrixB.inverse().display();
 	
-	// scalar multiplication
+	// Scalar multiplication
 	std::cout << "\nA * Scalar:\n";
 	MatrixA.scalarMultiply(Scalar).display();
 	std::cout << "\nB * Scalar:\n";
 	MatrixB.scalarMultiply(Scalar).display();
 
-	// addition
+	// Addition
 	std::cout << "\nA + B:\n";
 	MatrixA.matrixAddition(MatrixB).display();
 	
-	// subtraction
+	// Subtraction
 	std::cout << "\nA - B: \n";
 	MatrixA.matrixSubtraction(MatrixB).display();
 	
-	// matrix multiplication
+	// Matrix multiplication
 	std::cout << "\nA * B:\n";
 	MatrixA.matrixMultiplication(MatrixB).display();
 	std::cout << "\nB * A:\n";
 	MatrixB.matrixMultiplication(MatrixA).display();
 	
-	// identity matrix
+	// Identity matrix
 	std::cout << "\nIdentity Matrix:\n";
 	MatrixA.identityMatrix(MatrixA).display();
 }

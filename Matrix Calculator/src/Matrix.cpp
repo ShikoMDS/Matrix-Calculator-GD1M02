@@ -29,6 +29,7 @@ void Matrix::display() const
 	{
 		for (const double Val : Row)
 		{
+			// print value with less decimal places
 			std::cout << std::setprecision(2) << Val << "	";
 		}
 		std::cout << std::endl;
@@ -267,10 +268,10 @@ Matrix Matrix::identityMatrix(const Matrix& Other) const
 	Matrix Identity;
 	Identity.resize(4, 4);
 
+	// Call the multiplication function for matrix with the inverse
 	Identity = Other.matrixMultiplication(Other.inverse());
 
-	// Set very small values to zero (8.9e-16 is basically 0, whatever. n.b. Chris please remove my dumb comment when you see this c;)
-	// Basically, floating point precision issues I can't be bothered dealing with!!!
+	// Set very small values to zero (8.9e-16 is basically 0)
 	for (int I = 0; I < 4; ++I)
 	{
 		for (int J = 0; J < 4; ++J)
