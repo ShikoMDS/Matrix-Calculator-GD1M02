@@ -45,8 +45,7 @@ Matrix calculator implemented in C++.
   
 ## Disclaimer  
   
-This is currently in progress.  
-Source control testing by Shiko.  
+THIS VERSION HAS BEEN DISCARDED  
   
   
 ## Credits  
