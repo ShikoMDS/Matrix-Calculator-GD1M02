@@ -1,23 +1,31 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) [Year] Media Design School
+File Name : Matrix.cpp
+Description : Implementations for matrix calculation functions
+Author : Chris, Shikomisen (Ayoub)
+Mail : christopher.houdt@mds.ac.nz, ayoub.ahmad@mds.ac.nz
+**************************************************************************/
+
 #include "Matrix.h"
 
-Matrix::Matrix()
-{
-	// Default constructor
-}
+Matrix::Matrix() = default;
 
-Matrix::Matrix(const int Rows, const int Cols) : data(Rows, std::vector<double>(Cols, 0))
-{
-	// Constructor with size
-}
+Matrix::Matrix(const int Rows, const int Cols) : Data(Rows, std::vector<double>(Cols, 0)) {}
+
+Matrix::~Matrix() = default;
 
 void Matrix::resize(const int Rows, const int Cols)
 {
-	data.resize(Rows, std::vector<double>(Cols, 0));
+	Data.resize(Rows, std::vector<double>(Cols, 0));
 }
 
 void Matrix::display() const
 {
-	for (const auto& Row : data)
+	for (const auto& Row : Data)
 	{
 		for (const double Val : Row)
 		{
@@ -30,236 +38,259 @@ void Matrix::display() const
 double Matrix::determinant() const
 {
 	// Implementation for determinant
-	const double a = data[0][0];
-	const double b = data[0][1];
-	const double c = data[0][2];
-	const double d = data[0][3];
-	const double e = data[1][0];
-	const double f = data[1][1];
-	const double g = data[1][2];
-	const double h = data[1][3];
-	const double i = data[2][0];
-	const double j = data[2][1];
-	const double k = data[2][2];
-	const double l = data[2][3];
-	const double m = data[3][0];
-	const double n = data[3][1];
-	const double o = data[3][2];
-	const double p = data[3][3];
-	
-	double determinant = (a * f * k * p) + (a * g * l * n) + (a * h * j * o)
-		- (a * h * k * n) - (a * g * j * p) - (a * f * l * o)
-		- (b * e * k * p) - (c * e * l * n) - (d * e * j * o)
-		+ (d * e * k * n) + (c * e * j * p) + (b * e * l * o)
-		+ (b * g * i * p) + (c * h * i * n) + (d * f * i * o)
-		- (d * g * i * n) - (c * f * i * p) - (b * h * i * o)
-		- (b * g * l * m) - (c * h * j * m) - (d * f * k * m)
-		+ (d * g * j * m) + (c * f * l * m) + (b * h * k * m);
+	const double A = Data[0][0];
+	const double B = Data[0][1];
+	const double C = Data[0][2];
+	const double D = Data[0][3];
+	const double E = Data[1][0];
+	const double F = Data[1][1];
+	const double G = Data[1][2];
+	const double H = Data[1][3];
+	const double I = Data[2][0];
+	const double J = Data[2][1];
+	const double K = Data[2][2];
+	const double L = Data[2][3];
+	const double M = Data[3][0];
+	const double N = Data[3][1];
+	const double O = Data[3][2];
+	const double P = Data[3][3];
 
-	return determinant;
+	const double Determinant = (A * F * K * P) + (A * G * L * N) + (A * H * J * O)
+		- (A * H * K * N) - (A * G * J * P) - (A * F * L * O)
+		- (B * E * K * P) - (C * E * L * N) - (D * E * J * O)
+		+ (D * E * K * N) + (C * E * J * P) + (B * E * L * O)
+		+ (B * G * I * P) + (C * H * I * N) + (D * F * I * O)
+		- (D * G * I * N) - (C * F * I * P) - (B * H * I * O)
+		- (B * G * L * M) - (C * H * J * M) - (D * F * K * M)
+		+ (D * G * J * M) + (C * F * L * M) + (B * H * K * M);
+
+	return Determinant;
 }
 
 Matrix Matrix::transpose() const
 {
 	// Implementation for transpose
-	Matrix transpose;
-	transpose.resize(4, 4);
+	Matrix Transpose;
+	Transpose.resize(4, 4);
 
-	transpose[0][0] = data[0][0];
-	transpose[0][1] = data[1][0];
-	transpose[0][2] = data[2][0];
-	transpose[0][3] = data[3][0];
-	transpose[1][0] = data[0][1];
-	transpose[1][1] = data[1][1];
-	transpose[1][2] = data[2][1];
-	transpose[1][3] = data[3][1];
-	transpose[2][0] = data[0][2];
-	transpose[2][1] = data[1][2];
-	transpose[2][2] = data[2][2];
-	transpose[2][3] = data[3][2];
-	transpose[3][0] = data[0][3];
-	transpose[3][1] = data[1][3];
-	transpose[3][2] = data[2][3];
-	transpose[3][3] = data[3][3];
+	Transpose[0][0] = Data[0][0];
+	Transpose[0][1] = Data[1][0];
+	Transpose[0][2] = Data[2][0];
+	Transpose[0][3] = Data[3][0];
+	Transpose[1][0] = Data[0][1];
+	Transpose[1][1] = Data[1][1];
+	Transpose[1][2] = Data[2][1];
+	Transpose[1][3] = Data[3][1];
+	Transpose[2][0] = Data[0][2];
+	Transpose[2][1] = Data[1][2];
+	Transpose[2][2] = Data[2][2];
+	Transpose[2][3] = Data[3][2];
+	Transpose[3][0] = Data[0][3];
+	Transpose[3][1] = Data[1][3];
+	Transpose[3][2] = Data[2][3];
+	Transpose[3][3] = Data[3][3];
 
-	return transpose;
+	return Transpose;
 }
 
 Matrix Matrix::inverse() const
 {
 	// Implementation for inverse
-	const double a = data[0][0];
-	const double b = data[0][1];
-	const double c = data[0][2];
-	const double d = data[0][3];
-	const double e = data[1][0];
-	const double f = data[1][1];
-	const double g = data[1][2];
-	const double h = data[1][3];
-	const double i = data[2][0];
-	const double j = data[2][1];
-	const double k = data[2][2];
-	const double l = data[2][3];
-	const double m = data[3][0];
-	const double n = data[3][1];
-	const double o = data[3][2];
-	const double p = data[3][3];
+	const double A = Data[0][0];
+	const double B = Data[0][1];
+	const double C = Data[0][2];
+	const double D = Data[0][3];
+	const double E = Data[1][0];
+	const double F = Data[1][1];
+	const double G = Data[1][2];
+	const double H = Data[1][3];
+	const double I = Data[2][0];
+	const double J = Data[2][1];
+	const double K = Data[2][2];
+	const double L = Data[2][3];
+	const double M = Data[3][0];
+	const double N = Data[3][1];
+	const double O = Data[3][2];
+	const double P = Data[3][3];
 
-	Matrix cofactor;
-	cofactor.resize(4, 4);
+	Matrix Cofactor;
+	Cofactor.resize(4, 4);
 
-	cofactor[0][0] = f * ((k * p) - (o * l)) - g * ((j * p) - (n * l)) + h * ((j * o) - (n * k));
-	cofactor[0][1] = -(e * ((k * p) - (o * l)) - g * ((i * p) - (m * l)) + h * ((i * o) - (m * k)));
-	cofactor[0][2] = e * ((j * p) - (n * l)) - f * ((i * p) - (m * l)) + h * ((i * n) - (m * j));
-	cofactor[0][3] = -(e * ((j * o) - (n * k)) - f * ((i * o) - (m * k)) + g * ((i * n) - (m * j)));
-	cofactor[1][0] = -(b * ((k * p) - (o * l)) - c * ((j * p) - (n * l)) + d * ((j * o) - (n * k)));
-	cofactor[1][1] = a * ((k * p) - (o * l)) - c * ((i * p) - (m * l)) + d * ((i * o) - (m * k));
-	cofactor[1][2] = -(a * ((j * p) - (n * l)) - b * ((i * p) - (m * l)) + d * ((i * n) - (m * j)));
-	cofactor[1][3] = a * ((j * o) - (n * k)) - b * ((i * o) - (m * k)) + c * ((i * n) - (m * j));
-	cofactor[2][0] = b * ((g * p) - (o * h)) - c * ((f * p) - (n * h)) + d * ((f * o) - (n * g));
-	cofactor[2][1] = -(a * ((g * p) - (o * h)) - c * ((e * p) - (m * h)) + d * ((e * o) - (m * g)));
-	cofactor[2][2] = a * ((f * p) - (n * h)) - b * ((e * p) - (m * h)) + d * ((e * n) - (m * f));
-	cofactor[2][3] = -(a * ((f * o) - (n * g)) - b * ((e * o) - (m * g)) + c * ((e * n) - (m * f)));
-	cofactor[3][0] = -(b * ((g * l) - (k * h)) - c * ((f * l) - (j * h)) + d * ((f * k) - (j * g)));
-	cofactor[3][1] = a * ((g * l) - (k * h)) - c * ((e * l) - (i * h)) + d * ((e * k) - (i * g));
-	cofactor[3][2] = -(a * ((f * l) - (j * h)) - b * ((e * l) - (i * h)) + d * ((e * j) - (i * f)));	
-	cofactor[3][3] = a * ((f * k) - (j * g)) - b * ((e * k) - (i * g)) + c * ((e * j) - (i * f));
+	Cofactor[0][0] = F * ((K * P) - (O * L)) - G * ((J * P) - (N * L)) + H * ((J * O) - (N * K));
+	Cofactor[0][1] = -(E * ((K * P) - (O * L)) - G * ((I * P) - (M * L)) + H * ((I * O) - (M * K)));
+	Cofactor[0][2] = E * ((J * P) - (N * L)) - F * ((I * P) - (M * L)) + H * ((I * N) - (M * J));
+	Cofactor[0][3] = -(E * ((J * O) - (N * K)) - F * ((I * O) - (M * K)) + G * ((I * N) - (M * J)));
+	Cofactor[1][0] = -(B * ((K * P) - (O * L)) - C * ((J * P) - (N * L)) + D * ((J * O) - (N * K)));
+	Cofactor[1][1] = A * ((K * P) - (O * L)) - C * ((I * P) - (M * L)) + D * ((I * O) - (M * K));
+	Cofactor[1][2] = -(A * ((J * P) - (N * L)) - B * ((I * P) - (M * L)) + D * ((I * N) - (M * J)));
+	Cofactor[1][3] = A * ((J * O) - (N * K)) - B * ((I * O) - (M * K)) + C * ((I * N) - (M * J));
+	Cofactor[2][0] = B * ((G * P) - (O * H)) - C * ((F * P) - (N * H)) + D * ((F * O) - (N * G));
+	Cofactor[2][1] = -(A * ((G * P) - (O * H)) - C * ((E * P) - (M * H)) + D * ((E * O) - (M * G)));
+	Cofactor[2][2] = A * ((F * P) - (N * H)) - B * ((E * P) - (M * H)) + D * ((E * N) - (M * F));
+	Cofactor[2][3] = -(A * ((F * O) - (N * G)) - B * ((E * O) - (M * G)) + C * ((E * N) - (M * F)));
+	Cofactor[3][0] = -(B * ((G * L) - (K * H)) - C * ((F * L) - (J * H)) + D * ((F * K) - (J * G)));
+	Cofactor[3][1] = A * ((G * L) - (K * H)) - C * ((E * L) - (I * H)) + D * ((E * K) - (I * G));
+	Cofactor[3][2] = -(A * ((F * L) - (J * H)) - B * ((E * L) - (I * H)) + D * ((E * J) - (I * F)));	
+	Cofactor[3][3] = A * ((F * K) - (J * G)) - B * ((E * K) - (I * G)) + C * ((E * J) - (I * F));
 
-	Matrix inverse;
-	inverse.resize(4, 4);
-	inverse = cofactor.transpose();
+	Matrix Inverse;
+	Inverse.resize(4, 4);
+	Inverse = Cofactor.transpose();
 
-	inverse[0][0] = inverse[0][0] / determinant();
-	inverse[0][1] = inverse[0][1] / determinant();
-	inverse[0][2] = inverse[0][2] / determinant();
-	inverse[0][3] = inverse[0][3] / determinant();
-	inverse[1][0] = inverse[1][0] / determinant();
-	inverse[1][1] = inverse[1][1] / determinant();
-	inverse[1][2] = inverse[1][2] / determinant();
-	inverse[1][3] = inverse[1][3] / determinant();
-	inverse[2][0] = inverse[2][0] / determinant();
-	inverse[2][1] = inverse[2][1] / determinant();
-	inverse[2][2] = inverse[2][2] / determinant();
-	inverse[2][3] = inverse[2][3] / determinant();
-	inverse[3][0] = inverse[3][0] / determinant();
-	inverse[3][1] = inverse[3][1] / determinant();
-	inverse[3][2] = inverse[3][2] / determinant();
-	inverse[3][3] = inverse[3][3] / determinant();
+	Inverse[0][0] = Inverse[0][0] / determinant();
+	Inverse[0][1] = Inverse[0][1] / determinant();
+	Inverse[0][2] = Inverse[0][2] / determinant();
+	Inverse[0][3] = Inverse[0][3] / determinant();
+	Inverse[1][0] = Inverse[1][0] / determinant();
+	Inverse[1][1] = Inverse[1][1] / determinant();
+	Inverse[1][2] = Inverse[1][2] / determinant();
+	Inverse[1][3] = Inverse[1][3] / determinant();
+	Inverse[2][0] = Inverse[2][0] / determinant();
+	Inverse[2][1] = Inverse[2][1] / determinant();
+	Inverse[2][2] = Inverse[2][2] / determinant();
+	Inverse[2][3] = Inverse[2][3] / determinant();
+	Inverse[3][0] = Inverse[3][0] / determinant();
+	Inverse[3][1] = Inverse[3][1] / determinant();
+	Inverse[3][2] = Inverse[3][2] / determinant();
+	Inverse[3][3] = Inverse[3][3] / determinant();
 
-	return inverse;
+	return Inverse;
 }
 
-Matrix Matrix::scalarMultiply(double Scalar) const
+Matrix Matrix::scalarMultiply(const double Scalar) const
 {
 	// Implementation for scalar multiplication
-	Matrix resultant;
-	resultant.resize(4, 4);
+	Matrix Resultant;
+	Resultant.resize(4, 4);
 
-	resultant[0][0] = data[0][0] * Scalar;
-	resultant[0][1] = data[0][1] * Scalar;
-	resultant[0][2] = data[0][2] * Scalar;
-	resultant[0][3] = data[0][3] * Scalar;
-	resultant[1][0] = data[1][0] * Scalar;
-	resultant[1][1] = data[1][1] * Scalar;
-	resultant[1][2] = data[1][2] * Scalar;
-	resultant[1][3] = data[1][3] * Scalar;
-	resultant[2][0] = data[2][0] * Scalar;
-	resultant[2][1] = data[2][1] * Scalar;
-	resultant[2][2] = data[2][2] * Scalar;
-	resultant[2][3] = data[2][3] * Scalar;
-	resultant[3][0] = data[3][0] * Scalar;
-	resultant[3][1] = data[3][1] * Scalar;
-	resultant[3][2] = data[3][2] * Scalar;
-	resultant[3][3] = data[3][3] * Scalar;
+	Resultant[0][0] = Data[0][0] * Scalar;
+	Resultant[0][1] = Data[0][1] * Scalar;
+	Resultant[0][2] = Data[0][2] * Scalar;
+	Resultant[0][3] = Data[0][3] * Scalar;
+	Resultant[1][0] = Data[1][0] * Scalar;
+	Resultant[1][1] = Data[1][1] * Scalar;
+	Resultant[1][2] = Data[1][2] * Scalar;
+	Resultant[1][3] = Data[1][3] * Scalar;
+	Resultant[2][0] = Data[2][0] * Scalar;
+	Resultant[2][1] = Data[2][1] * Scalar;
+	Resultant[2][2] = Data[2][2] * Scalar;
+	Resultant[2][3] = Data[2][3] * Scalar;
+	Resultant[3][0] = Data[3][0] * Scalar;
+	Resultant[3][1] = Data[3][1] * Scalar;
+	Resultant[3][2] = Data[3][2] * Scalar;
+	Resultant[3][3] = Data[3][3] * Scalar;
 
-	return resultant;
+	return Resultant;
 }
 
 Matrix Matrix::matrixAddition(const Matrix& Other) const
 {
 	// Implementation for matrix addition
-	Matrix resultant;
-	resultant.resize(4, 4);
+	Matrix Resultant;
+	Resultant.resize(4, 4);
 
-	resultant[0][0] = data[0][0] + Other[0][0];
-	resultant[0][1] = data[0][1] + Other[0][1];
-	resultant[0][2] = data[0][2] + Other[0][2];
-	resultant[0][3] = data[0][3] + Other[0][3];
-	resultant[1][0] = data[1][0] + Other[1][0];
-	resultant[1][1] = data[1][1] + Other[1][1];
-	resultant[1][2] = data[1][2] + Other[1][2];
-	resultant[1][3] = data[1][3] + Other[1][3];
-	resultant[2][0] = data[2][0] + Other[2][0];
-	resultant[2][1] = data[2][1] + Other[2][1];
-	resultant[2][2] = data[2][2] + Other[2][2];
-	resultant[2][3] = data[2][3] + Other[2][3];
-	resultant[3][0] = data[3][0] + Other[3][0];
-	resultant[3][1] = data[3][1] + Other[3][1];
-	resultant[3][2] = data[3][2] + Other[3][2];
-	resultant[3][3] = data[3][3] + Other[3][3];
+	Resultant[0][0] = Data[0][0] + Other[0][0];
+	Resultant[0][1] = Data[0][1] + Other[0][1];
+	Resultant[0][2] = Data[0][2] + Other[0][2];
+	Resultant[0][3] = Data[0][3] + Other[0][3];
+	Resultant[1][0] = Data[1][0] + Other[1][0];
+	Resultant[1][1] = Data[1][1] + Other[1][1];
+	Resultant[1][2] = Data[1][2] + Other[1][2];
+	Resultant[1][3] = Data[1][3] + Other[1][3];
+	Resultant[2][0] = Data[2][0] + Other[2][0];
+	Resultant[2][1] = Data[2][1] + Other[2][1];
+	Resultant[2][2] = Data[2][2] + Other[2][2];
+	Resultant[2][3] = Data[2][3] + Other[2][3];
+	Resultant[3][0] = Data[3][0] + Other[3][0];
+	Resultant[3][1] = Data[3][1] + Other[3][1];
+	Resultant[3][2] = Data[3][2] + Other[3][2];
+	Resultant[3][3] = Data[3][3] + Other[3][3];
 
-	return resultant;
+	return Resultant;
 }
 
 Matrix Matrix::matrixSubtraction(const Matrix& Other) const
 {
 	// Implementation for matrix subtraction
-	Matrix resultant;
-	resultant.resize(4, 4);
+	Matrix Resultant;
+	Resultant.resize(4, 4);
 
-	resultant[0][0] = data[0][0] - Other[0][0];
-	resultant[0][1] = data[0][1] - Other[0][1];
-	resultant[0][2] = data[0][2] - Other[0][2];
-	resultant[0][3] = data[0][3] - Other[0][3];
-	resultant[1][0] = data[1][0] - Other[1][0];
-	resultant[1][1] = data[1][1] - Other[1][1];
-	resultant[1][2] = data[1][2] - Other[1][2];
-	resultant[1][3] = data[1][3] - Other[1][3];
-	resultant[2][0] = data[2][0] - Other[2][0];
-	resultant[2][1] = data[2][1] - Other[2][1];
-	resultant[2][2] = data[2][2] - Other[2][2];
-	resultant[2][3] = data[2][3] - Other[2][3];
-	resultant[3][0] = data[3][0] - Other[3][0];
-	resultant[3][1] = data[3][1] - Other[3][1];
-	resultant[3][2] = data[3][2] - Other[3][2];
-	resultant[3][3] = data[3][3] - Other[3][3];
+	Resultant[0][0] = Data[0][0] - Other[0][0];
+	Resultant[0][1] = Data[0][1] - Other[0][1];
+	Resultant[0][2] = Data[0][2] - Other[0][2];
+	Resultant[0][3] = Data[0][3] - Other[0][3];
+	Resultant[1][0] = Data[1][0] - Other[1][0];
+	Resultant[1][1] = Data[1][1] - Other[1][1];
+	Resultant[1][2] = Data[1][2] - Other[1][2];
+	Resultant[1][3] = Data[1][3] - Other[1][3];
+	Resultant[2][0] = Data[2][0] - Other[2][0];
+	Resultant[2][1] = Data[2][1] - Other[2][1];
+	Resultant[2][2] = Data[2][2] - Other[2][2];
+	Resultant[2][3] = Data[2][3] - Other[2][3];
+	Resultant[3][0] = Data[3][0] - Other[3][0];
+	Resultant[3][1] = Data[3][1] - Other[3][1];
+	Resultant[3][2] = Data[3][2] - Other[3][2];
+	Resultant[3][3] = Data[3][3] - Other[3][3];
 
-	return resultant;
+	return Resultant;
 }
 
 Matrix Matrix::matrixMultiplication(const Matrix& Other) const
 {
 	// Implementation for matrix multiplication
-	Matrix resultant;
-	resultant.resize(4, 4);
+	Matrix Resultant;
+	Resultant.resize(4, 4);
 
-	resultant[0][0] = (data[0][0] * Other[0][0]) + (data[0][1] * Other[1][0]) + (data[0][2] * Other[2][0]) + (data[0][3] * Other[3][0]);
-	resultant[0][1] = (data[0][0] * Other[0][1]) + (data[0][1] * Other[1][1]) + (data[0][2] * Other[2][1]) + (data[0][3] * Other[3][1]);
-	resultant[0][2] = (data[0][0] * Other[0][2]) + (data[0][1] * Other[1][2]) + (data[0][2] * Other[2][2]) + (data[0][3] * Other[3][2]);
-	resultant[0][3] = (data[0][0] * Other[0][3]) + (data[0][1] * Other[1][3]) + (data[0][2] * Other[2][3]) + (data[0][3] * Other[3][3]);
-	resultant[1][0] = (data[1][0] * Other[0][0]) + (data[1][1] * Other[1][0]) + (data[1][2] * Other[2][0]) + (data[1][3] * Other[3][0]);
-	resultant[1][1] = (data[1][0] * Other[0][1]) + (data[1][1] * Other[1][1]) + (data[1][2] * Other[2][1]) + (data[1][3] * Other[3][1]);
-	resultant[1][2] = (data[1][0] * Other[0][2]) + (data[1][1] * Other[1][2]) + (data[1][2] * Other[2][2]) + (data[1][3] * Other[3][2]);
-	resultant[1][3] = (data[1][0] * Other[0][3]) + (data[1][1] * Other[1][3]) + (data[1][2] * Other[2][3]) + (data[1][3] * Other[3][3]);
-	resultant[2][0] = (data[2][0] * Other[0][0]) + (data[2][1] * Other[1][0]) + (data[2][2] * Other[2][0]) + (data[2][3] * Other[3][0]);
-	resultant[2][1] = (data[2][0] * Other[0][1]) + (data[2][1] * Other[1][1]) + (data[2][2] * Other[2][1]) + (data[2][3] * Other[3][1]);
-	resultant[2][2] = (data[2][0] * Other[0][2]) + (data[2][1] * Other[1][2]) + (data[2][2] * Other[2][2]) + (data[2][3] * Other[3][2]);
-	resultant[2][3] = (data[2][0] * Other[0][3]) + (data[2][1] * Other[1][3]) + (data[2][2] * Other[2][3]) + (data[2][3] * Other[3][3]);
-	resultant[3][0] = (data[3][0] * Other[0][0]) + (data[3][1] * Other[1][0]) + (data[3][2] * Other[2][0]) + (data[3][3] * Other[3][0]);
-	resultant[3][1] = (data[3][0] * Other[0][1]) + (data[3][1] * Other[1][1]) + (data[3][2] * Other[2][1]) + (data[3][3] * Other[3][1]);
-	resultant[3][2] = (data[3][0] * Other[0][2]) + (data[3][1] * Other[1][2]) + (data[3][2] * Other[2][2]) + (data[3][3] * Other[3][2]);
-	resultant[3][3] = (data[3][0] * Other[0][3]) + (data[3][1] * Other[1][3]) + (data[3][2] * Other[2][3]) + (data[3][3] * Other[3][3]);
+	Resultant[0][0] = (Data[0][0] * Other[0][0]) + (Data[0][1] * Other[1][0]) + (Data[0][2] * Other[2][0]) + (Data[0][3] * Other[3][0]);
+	Resultant[0][1] = (Data[0][0] * Other[0][1]) + (Data[0][1] * Other[1][1]) + (Data[0][2] * Other[2][1]) + (Data[0][3] * Other[3][1]);
+	Resultant[0][2] = (Data[0][0] * Other[0][2]) + (Data[0][1] * Other[1][2]) + (Data[0][2] * Other[2][2]) + (Data[0][3] * Other[3][2]);
+	Resultant[0][3] = (Data[0][0] * Other[0][3]) + (Data[0][1] * Other[1][3]) + (Data[0][2] * Other[2][3]) + (Data[0][3] * Other[3][3]);
+	Resultant[1][0] = (Data[1][0] * Other[0][0]) + (Data[1][1] * Other[1][0]) + (Data[1][2] * Other[2][0]) + (Data[1][3] * Other[3][0]);
+	Resultant[1][1] = (Data[1][0] * Other[0][1]) + (Data[1][1] * Other[1][1]) + (Data[1][2] * Other[2][1]) + (Data[1][3] * Other[3][1]);
+	Resultant[1][2] = (Data[1][0] * Other[0][2]) + (Data[1][1] * Other[1][2]) + (Data[1][2] * Other[2][2]) + (Data[1][3] * Other[3][2]);
+	Resultant[1][3] = (Data[1][0] * Other[0][3]) + (Data[1][1] * Other[1][3]) + (Data[1][2] * Other[2][3]) + (Data[1][3] * Other[3][3]);
+	Resultant[2][0] = (Data[2][0] * Other[0][0]) + (Data[2][1] * Other[1][0]) + (Data[2][2] * Other[2][0]) + (Data[2][3] * Other[3][0]);
+	Resultant[2][1] = (Data[2][0] * Other[0][1]) + (Data[2][1] * Other[1][1]) + (Data[2][2] * Other[2][1]) + (Data[2][3] * Other[3][1]);
+	Resultant[2][2] = (Data[2][0] * Other[0][2]) + (Data[2][1] * Other[1][2]) + (Data[2][2] * Other[2][2]) + (Data[2][3] * Other[3][2]);
+	Resultant[2][3] = (Data[2][0] * Other[0][3]) + (Data[2][1] * Other[1][3]) + (Data[2][2] * Other[2][3]) + (Data[2][3] * Other[3][3]);
+	Resultant[3][0] = (Data[3][0] * Other[0][0]) + (Data[3][1] * Other[1][0]) + (Data[3][2] * Other[2][0]) + (Data[3][3] * Other[3][0]);
+	Resultant[3][1] = (Data[3][0] * Other[0][1]) + (Data[3][1] * Other[1][1]) + (Data[3][2] * Other[2][1]) + (Data[3][3] * Other[3][1]);
+	Resultant[3][2] = (Data[3][0] * Other[0][2]) + (Data[3][1] * Other[1][2]) + (Data[3][2] * Other[2][2]) + (Data[3][3] * Other[3][2]);
+	Resultant[3][3] = (Data[3][0] * Other[0][3]) + (Data[3][1] * Other[1][3]) + (Data[3][2] * Other[2][3]) + (Data[3][3] * Other[3][3]);
 
-	return resultant;
+	return Resultant;
 }
 
-Matrix Matrix::identityMatrix(Matrix _Matrix) const
+Matrix Matrix::identityMatrix(const Matrix& Other) const
 {
 	// Implementation for identity matrix
-	Matrix identity;
-	identity.resize(4, 4);
+	Matrix Identity;
+	Identity.resize(4, 4);
 
-	identity = _Matrix.matrixMultiplication(_Matrix.inverse());
+	Identity = Other.matrixMultiplication(Other.inverse());
 
-	return identity;
+	// Set very small values to zero (8.9e-16 is basically 0, whatever. n.b. Chris please remove my dumb comment when you see this c;)
+	// Basically, floating point precision issues I can't be bothered dealing with!!!
+	for (int I = 0; I < 4; ++I)
+	{
+		for (int J = 0; J < 4; ++J)
+		{
+			if (std::abs(Identity[I][J]) < 1e-10)
+			{
+				Identity[I][J] = 0.0;
+			}
+		}
+	}
+
+	return Identity;
+}
+
+const std::vector<double>& Matrix::operator[](const int Index) const
+{
+	return Data[Index];
+}
+
+std::vector<double>& Matrix::operator[](const int Index)
+{
+	return Data[Index];
 }

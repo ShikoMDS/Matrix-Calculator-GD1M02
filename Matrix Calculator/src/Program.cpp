@@ -1,9 +1,20 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) [Year] Media Design School
+File Name : Program.cpp
+Description : Implementations for a matrix calculator program
+Author : Chris, Shikomisen (Ayoub)
+Mail : christopher.houdt@mds.ac.nz, ayoub.ahmad@mds.ac.nz
+**************************************************************************/
+
 #include "Program.h"
 
-Program::Program()
-{
-	// Default constructor
-}
+Program::Program() : Scalar(0.0) {}
+
+Program::~Program() = default;
 
 void Program::run()
 {
@@ -12,96 +23,96 @@ void Program::run()
 	performOperations();
 }
 
-void Program::loadMatricesAndScalar(const std::string& filename)
+void Program::loadMatricesAndScalar(const std::string& Filename)
 {
-	std::ifstream inputFile(filename);
-	if (!inputFile)
+	std::ifstream InputFile(Filename);
+	if (!InputFile)
 	{
 		std::cerr << "Error opening file." << std::endl;
 		exit(1);
 	}
 
-	matrixA.resize(4, 4);
-	matrixB.resize(4, 4);
+	MatrixA.resize(4, 4);
+	MatrixB.resize(4, 4);
 
 	// Read matrix A
-	for (int i = 0; i < 4; ++i)
+	for (int I = 0; I < 4; ++I)
 	{
-		for (int j = 0; j < 4; ++j)
+		for (int J = 0; J < 4; ++J)
 		{
-			inputFile >> matrixA[i][j];
+			InputFile >> MatrixA[I][J];
 		}
 	}
 
 	// Read matrix B
-	for (int i = 0; i < 4; ++i)
+	for (int I = 0; I < 4; ++I)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			inputFile >> matrixB[i][j];
+			InputFile >> MatrixB[I][j];
 		}
 	}
 
 	// Read scalar
-	inputFile >> scalar;
+	InputFile >> Scalar;
 
 	// Close the file
-	inputFile.close();
+	InputFile.close();
 }
 
-void Program::displayMatrices()
+void Program::displayMatrices() const
 {
 	std::cout << "Matrix A:" << std::endl;
-	matrixA.display();
+	MatrixA.display();
 
 	std::cout << "\nMatrix B:" << std::endl;
-	matrixB.display();
+	MatrixB.display();
 
-	std::cout << "\nScalar: " << scalar << std::endl;
+	std::cout << "\nScalar: " << Scalar << std::endl;
 }
 
-void Program::performOperations()
+void Program::performOperations() const
 {
 	// Matrix operations using the Matrix class
-	// You can call Matrix member functions here
+	// Call matrix member functions here
 
 	// determinant
-	std::cout << "\n|A|: " << matrixA.determinant();
-	std::cout << "\n|B|: " << matrixB.determinant();
+	std::cout << "\n|A|: " << MatrixA.determinant();
+	std::cout << "\n|B|: " << MatrixB.determinant();
 
 	// transpose
 	std::cout << "\n\nTranspose of A:\n";
-	matrixA.transpose().display();
+	MatrixA.transpose().display();
 	std::cout << "\n\nTranspose of B:\n";
-	matrixB.transpose().display();
+	MatrixB.transpose().display();
 	
 	// inverse
 	std::cout << "\nInverse of A:\n";
-	matrixA.inverse().display();
+	MatrixA.inverse().display();
 	std::cout << "\nInverse of B:\n";
-	matrixB.inverse().display();
+	MatrixB.inverse().display();
 	
-	// scalar maultiplication
+	// scalar multiplication
 	std::cout << "\nA * Scalar:\n";
-	matrixA.scalarMultiply(scalar).display();
+	MatrixA.scalarMultiply(Scalar).display();
 	std::cout << "\nB * Scalar:\n";
-	matrixB.scalarMultiply(scalar).display();
+	MatrixB.scalarMultiply(Scalar).display();
 
 	// addition
 	std::cout << "\nA + B:\n";
-	matrixA.matrixAddition(matrixB).display();
+	MatrixA.matrixAddition(MatrixB).display();
 	
 	// subtraction
 	std::cout << "\nA - B: \n";
-	matrixA.matrixSubtraction(matrixB).display();
+	MatrixA.matrixSubtraction(MatrixB).display();
 	
 	// matrix multiplication
 	std::cout << "\nA * B:\n";
-	matrixA.matrixMultiplication(matrixB).display();
+	MatrixA.matrixMultiplication(MatrixB).display();
 	std::cout << "\nB * A:\n";
-	matrixB.matrixMultiplication(matrixA).display();
+	MatrixB.matrixMultiplication(MatrixA).display();
 	
 	// identity matrix
 	std::cout << "\nIdentity Matrix:\n";
-	matrixA.identityMatrix(matrixA).display();
+	MatrixA.identityMatrix(MatrixA).display();
 }
