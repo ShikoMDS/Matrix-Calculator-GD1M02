@@ -21,25 +21,22 @@ void Program::loadMatricesAndScalar(const std::string& filename)
 		exit(1);
 	}
 
-	int size;
-	inputFile >> size;
-
-	matrixA.resize(size, size);
-	matrixB.resize(size, size);
+	matrixA.resize(4, 4);
+	matrixB.resize(4, 4);
 
 	// Read matrix A
-	for (int i = 0; i < size; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
-		for (int j = 0; j < size; ++j)
+		for (int j = 0; j < 4; ++j)
 		{
 			inputFile >> matrixA[i][j];
 		}
 	}
 
 	// Read matrix B
-	for (int i = 0; i < size; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
-		for (int j = 0; j < size; ++j)
+		for (int j = 0; j < 4; ++j)
 		{
 			inputFile >> matrixB[i][j];
 		}
@@ -67,13 +64,44 @@ void Program::performOperations()
 {
 	// Matrix operations using the Matrix class
 	// You can call Matrix member functions here
-	// For example:
-	// matrixA.inverse();
-	// matrixA.transpose();
-	// matrixA.scalarMultiply(scalar);
-	// matrixA.matrixAddition(matrixB);
-	// matrixA.matrixSubtraction(matrixB);
-	// matrixA.matrixMultiplication(matrixB);
-	// matrixB.matrixMultiplication(matrixA);
-	// matrixA.identityMatrix();
+
+	// determinant
+	std::cout << "\n|A|: " << matrixA.determinant();
+	std::cout << "\n|B|: " << matrixB.determinant();
+
+	// transpose
+	std::cout << "\n\nTranspose of A:\n";
+	matrixA.transpose().display();
+	std::cout << "\n\nTranspose of B:\n";
+	matrixB.transpose().display();
+	
+	// inverse
+	std::cout << "\nInverse of A:\n";
+	matrixA.inverse().display();
+	std::cout << "\nInverse of B:\n";
+	matrixB.inverse().display();
+	
+	// scalar maultiplication
+	std::cout << "\nA * Scalar:\n";
+	matrixA.scalarMultiply(scalar).display();
+	std::cout << "\nB * Scalar:\n";
+	matrixB.scalarMultiply(scalar).display();
+
+	// addition
+	std::cout << "\nA + B:\n";
+	matrixA.matrixAddition(matrixB).display();
+	
+	// subtraction
+	std::cout << "\nA - B: \n";
+	matrixA.matrixSubtraction(matrixB).display();
+	
+	// matrix multiplication
+	std::cout << "\nA * B:\n";
+	matrixA.matrixMultiplication(matrixB).display();
+	std::cout << "\nB * A:\n";
+	matrixB.matrixMultiplication(matrixA).display();
+	
+	// identity matrix
+	std::cout << "\nIdentity Matrix:\n";
+	matrixA.identityMatrix().display();
 }
