@@ -61,7 +61,7 @@ The program has been designed to be operated with standard keyboard and mouse co
 Due to a potential issue with floating point value precision, there has been a smalll inplementation to check for any value less than 1e-10 to be set to 0.  
 All code was written by Chris and Ayoub based off our own knowledge from classes with lecturers and self driven research of the C++ coding language.  
 This program is complete for submission. All issues have been searched for and fixed. While this program is complete, unknown bugs may still be present.  
-.vs/StellarSteps/v17/.suo is included for ease of solution loadup purposes since the solution has been manually configured. The solution should start with x64 Release, on main.cpp and Matrix.txt in side by side docks.  
+.vs/Matrix Calculator/v17/.suo is included for ease of solution loadup purposes since the solution has been manually configured. The solution should start with x64 Release, on main.cpp and Matrix.txt in side by side docks.  
   
   
 ## Credits  
